@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome back to #{title} modifed by Sai Prashanth Volete
+  p
+    -let image_names  =["coke.jpg","pepsi.jpg","fanta.jpg","mirinda.jpg","sprite.jpg"]
+    -for(var i=0;i<3; i++) {
+        -let r = Math.floor(Math.random()*5);
+        img(src=`/images/${image_names[r]}` alt=`${r}` style+'height:300px; width:300px')
+    -} 
