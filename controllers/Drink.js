@@ -19,3 +19,15 @@ exports.Drink_delete = function(req, res) {
 exports.Drink_update_put = function(req, res) {
  res.send('NOT IMPLEMENTED: Drink update PUT' + req.params.id);
 };
+
+// List of all Drinks
+exports.Drink_list = async function(req, res) {
+    try{
+    theDrink = await Drink.find();
+    res.send(theDrink);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    }
+   };

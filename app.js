@@ -11,6 +11,7 @@ var db = mongoose.connection;
 //Bind connection to error event
 db.on('error', console.error.bind(console, 'MongoDB connectionerror:'));
 db.once("open", function(){console.log("Connection to DB succeeded")});
+
 var resourceRouter = require('./routes/resource');
 var Drink = require("./models/Drink");
 var indexRouter = require('./routes/index');
@@ -43,6 +44,7 @@ app.use('/Drinks', drinksRouter);
 app.use('/board', boardRouter);
 app.use('/selector', selectorRouter);
 app.use('/resource', resourceRouter);
+app.use('/Drinks',Drink);
 
 async function recreateDB(){
   // Delete everything
@@ -64,9 +66,9 @@ async function recreateDB(){
       Drink({ _id: new mongoose.Types.ObjectId(), drink_type: "Fanta", drink_size: "small", drink_cost: 100 });
       instance3.save().then( function(err,doc) {
         if(err) return console.error(err);
-        console.log("First object saved")
+        console.log("Third object saved")
         });
-  /*(async () => {
+  (async () => {
     let output1,output2,output3;
     try {
       output1 = await instance1.save();
@@ -76,7 +78,7 @@ async function recreateDB(){
     } catch (error) {
       console.error(error);
     }
-  })();*/
+  })();
   
 }
  
