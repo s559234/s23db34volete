@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1= title
+  -let items = results
+  div(class="container-fluid")
+    div(class="row")
+      each item,index in items
+        div(class="col-sm-2",onClick=`buy(${index})`)
+          p drink_type:  #{item.drink_type}
+          p drink_size:  #{item.drink_size}
+          p drink_cost:  #{item.drink_cost}
+  script.
+    function buy(N) {
+      N=N+1;
+      alert('You purchased item '+N);
+    }
+
+
+ 

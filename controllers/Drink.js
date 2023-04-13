@@ -40,7 +40,7 @@ exports.Drink_list = async function(req, res) {
 exports.Drink_view_all_Page = async function(req, res) {
     try{
     theDrink = await Drink.find();
-    res.render('Drinks', { title: 'Drink Search Results', results: theDrink });
+    res.render('Drink', { title: 'Drinks Search Results', results: theDrink });
     }
     catch(err){
     res.status(500);
