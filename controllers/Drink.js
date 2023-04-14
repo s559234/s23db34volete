@@ -49,7 +49,7 @@ exports.Drink_view_all_Page = async function(req, res) {
    };
 
 
-   // Handle Costume create on POST.
+   // Handle Drink create on POST.
 exports.Drink_create_post = async function(req, res) {
     console.log(req.body)
     let document = new Drink();
@@ -68,4 +68,45 @@ exports.Drink_create_post = async function(req, res) {
     res.status(500);
     res.send(`{"error": ${err}}`);
     }
+};
+
+// for a specific Drink.
+exports.Drink_detail = async function(req, res) {
+    console.log("detail" + req.params.id)
+    try {
+    result = await Drink.findById( req.params.id)
+    res.send(result)
+    } catch (error) {
+    res.status(500)
+    res.send(`{"error": document for id ${req.params.id} not found`);
+    }
+    };
+    
+
+
+    // Handle Drink update form on PUT.
+exports.Drink_update_put = async function(req, res) {
+ console.log(`update on id ${req.params.id} with body
+${JSON.stringify(req.body)}`)
+ try {
+ let toUpdate = await Drink.findById( req.params.id)
+ if(req.body.checkboxsale) 
+   toUpdate.sale = true;
+ else 
+   toUpdate.same = false;
+ // Do updates of properties
+ if(req.body.drink_type)
+   toUpdate.drink_type = req.body.drink_type;
+ if(req.body.drink_cost) 
+   toUpdate.drink_cost = req.body.drink_cost;
+ if(req.body.drink_size) 
+   toUpdate.drink_size = req.body.drink_size;
+ let result = await toUpdate.save();
+ console.log("Sucess " + result)
+ res.send(result)
+ } catch (err) {
+ res.status(500)
+ res.send(`{"error": ${err}: Update for id ${req.params.id}
+failed`);
+ }
 };
