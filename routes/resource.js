@@ -18,3 +18,7 @@ router.get('/Drink/:id', Drink_controller.Drink_detail);
 // GET request for list of all Drink items.
 router.get('/Drink', Drink_controller.Drink_list);
 module.exports = router;
+
+
+/* GET detail Drink page */
+router.get('/detail', Drink_controller.Drink_view_one_Page);

@@ -13,13 +13,13 @@ exports.Drink_create_post = function(req, res) {
  res.send('NOT IMPLEMENTED: Drink create POST');
 };
 // Handle Drink delete form on DELETE.
-exports.Drink_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: Drink delete DELETE ' + req.params.id);
-};
+//exports.Drink_delete = function(req, res) {
+// res.send('NOT IMPLEMENTED: Drink delete DELETE ' + req.params.id);
+//};
 // Handle Drink update form on PUT.
-exports.Drink_update_put = function(req, res) {
- res.send('NOT IMPLEMENTED: Drink update PUT' + req.params.id);
-};// List of all Drinks
+//exports.Drink_update_put = function(req, res) {
+ //res.send('NOT IMPLEMENTED: Drink update PUT' + req.params.id);
+//};// List of all Drinks
 
 // List of all Drink
 exports.Drink_list = async function(req, res) {
@@ -110,3 +110,33 @@ ${JSON.stringify(req.body)}`)
 failed`);
  }
 };
+
+
+
+// Handle Drink delete on DELETE.
+exports.Drink_delete = async function(req, res) {
+   console.log("delete " + req.params.id)
+   try {
+   result = await Drink.findByIdAndDelete( req.params.id)
+   console.log("Removed " + result)
+   res.send(result)
+   } catch (err) {
+   res.status(500)
+   res.send(`{"error": Error deleting ${err}}`);
+   }
+  };
+
+
+// Handle a show one view with id specified by query
+exports.Drink_view_one_Page = async function(req, res) {
+   console.log("single view for id " + req.query.id)
+   try{
+   result = await Drink.findById( req.query.id)
+   res.render('Drinkdetail',
+  { title: 'Drink Detail', toShow: result });
+   }
+   catch(err){
+   res.status(500)
+   res.send(`{'error': '${err}'}`);
+   }
+  };
