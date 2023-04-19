@@ -1,10 +1,13 @@
 extends layout
 block content
  h1= title
- - let drinkid = toShow._id
- - let drink_type = toShow.drink_type
- - let drink_size = toShow.drink_size
- - let drink_cost = toShow.drink_cost
+ if (toShow == null)
+   h2 No instance to delete
+ else
+  - let drinkid = toShow._id
+  - let drink_type = toShow.drink_type
+  - let drink_size = toShow.drink_size
+  - let drink_cost = toShow.drink_cost
 
  div.row(class='mb-2')
   div.mr-1 ID is

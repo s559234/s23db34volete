@@ -8,6 +8,8 @@ a {
 }
 
 .DrinkAttr {
-  background-color: aquamarine;
+  background-color: rgb(255, 127, 127);
   width: 120px;
+  padding: 10px;
+  margin: 5px;
  }
