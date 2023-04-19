@@ -1,0 +1,40 @@
+extends layout
+block content
+ h1= title
+ - let drinkid = toShow._id
+ - let drink_type = toShow.drink_type
+ - let drink_size = toShow.drink_size
+ - let drink_cost = toShow.drink_cost
+
+ div.row(class='mb-2')
+  div.mr-1 ID is
+  div #{drinkid}
+ - let actionid = "/resource/Drink/" + drinkid
+ form(id='drinkForm', action= actionid, method="PUT")
+   div.form-group
+     label.DrinkAttr(for='drink_type') drink type
+     input#drink_type(type='text', name='drink_type', value= drink_type )
+   div.form-group
+     label.DrinkAttr(for='drink_size') drink size
+     input#drink_size(type='text', name='drink_size', value= drink_size )
+   div.form-group
+     label.DrinkAttr(for='drink_cost') drink cost
+     input#drink_cost(type='number', name='drink_cost', value= drink_cost )
+   input(type="submit")
+ script.
+   document.forms['drinkForm'].addEventListener('submit', (event) => {
+    event.preventDefault();
+    // TODO do something here to show user that form is being submitted
+    fetch(event.target.action, {
+      method: 'PUT',
+      body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+     }).then((resp) => {
+      return resp.json(); // or resp.text() or whatever the server sends
+     }).then((body) => {
+      alert("Update succeded")
+      // TODO handle body
+    }).catch((error) => {
+     // TODO handle error
+     alert("Update failed " + error )
+    });
+  });

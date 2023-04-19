@@ -9,9 +9,9 @@ exports.Drink_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: Drink detail: ' + req.params.id);
 };
 // Handle Drink create on POST.
-exports.Drink_create_post = function(req, res) {
- res.send('NOT IMPLEMENTED: Drink create POST');
-};
+//exports.Drink_create_post = function(req, res) {
+ //res.send('NOT IMPLEMENTED: Drink create POST');
+//};
 // Handle Drink delete form on DELETE.
 //exports.Drink_delete = function(req, res) {
 // res.send('NOT IMPLEMENTED: Drink delete DELETE ' + req.params.id);
@@ -140,3 +140,46 @@ exports.Drink_view_one_Page = async function(req, res) {
    res.send(`{'error': '${err}'}`);
    }
   };
+
+
+  // Handle building the view for creating a Drink.
+// No body, no in path parameter, no query.
+// Does not need to be async
+exports.Drink_create_Page = function(req, res) {
+  console.log("create view")
+  try{
+  res.render('Drinkcreate', { title: 'Drink Create'});
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };
+
+
+ // Handle building the view for updating a Drink.
+// query provides the id
+exports.Drink_update_Page = async function(req, res) {
+  console.log("update view for item "+req.query.id)
+  try{
+  let result = await Drink.findById(req.query.id)
+  res.render('Drinkupdate', { title: 'Drink Update', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };
+
+ // Handle a delete one view with id from query
+exports.Drink_delete_Page = async function(req, res) {
+  console.log("Delete view for id " + req.query.id)
+  try{
+  result = await Drink.findById(req.query.id)
+  res.render('Drinkdelete', { title: 'Drink Delete', toShow: result });
+  }
+  catch(err){
+  res.status(500)
+  res.send(`{'error': '${err}'}`);
+  }
+ };
