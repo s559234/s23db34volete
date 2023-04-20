@@ -2,18 +2,18 @@ extends layout
 block content
  h1= title
  if (toShow == null)
-   h2 No instance to delete
+   h2 No instance to update
  else
   - let drinkid = toShow._id
   - let drink_type = toShow.drink_type
   - let drink_size = toShow.drink_size
   - let drink_cost = toShow.drink_cost
 
- div.row(class='mb-2')
-  div.mr-1 ID is
-  div #{drinkid}
- - let actionid = "/resource/Drink/" + drinkid
- form(id='drinkForm', action= actionid, method="PUT")
+  div.row(class='mb-2')
+   div.mr-1 ID is
+   div #{drinkid}
+  - let actionid = "/resource/Drink/" + drinkid
+  form(id='drinkForm', action= actionid, method="PUT")
    div.form-group
      label.DrinkAttr(for='drink_type') drink type
      input#drink_type(type='text', name='drink_type', value= drink_type )
@@ -24,7 +24,7 @@ block content
      label.DrinkAttr(for='drink_cost') drink cost
      input#drink_cost(type='number', name='drink_cost', value= drink_cost )
    input(type="submit")
- script.
+  script.
    document.forms['drinkForm'].addEventListener('submit', (event) => {
     event.preventDefault();
     // TODO do something here to show user that form is being submitted
@@ -40,4 +40,4 @@ block content
      // TODO handle error
      alert("Update failed " + error )
     });
-  });
+   ``});
