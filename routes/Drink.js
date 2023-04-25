@@ -5,11 +5,7 @@ var router = express.Router();
 router.get('/', Drink_controlers.Drink_view_all_Page );
 module.exports = router;
 
-/* GET detail Drink page */
-router.get('/detail', Drink_controlers.Drink_view_one_Page);
 
-/* GET create Drink page */
-router.get('/create', Drink_controlers.Drink_create_Page);
 
 // A little function to check if we have an authorized user and continue on
 //or
@@ -23,7 +19,11 @@ const secured = (req, res, next) => {
 }
    
 
+/* GET detail Drink page */
+router.get('/detail',secured ,Drink_controlers.Drink_view_one_Page);
 
+/* GET create Drink page */
+router.get('/create', secured,Drink_controlers.Drink_create_Page);
 /* GET create update page */
 router.get('/update',secured, Drink_controlers.Drink_update_Page);
 
