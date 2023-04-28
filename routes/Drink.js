@@ -27,4 +27,4 @@ router.get('/create', secured,Drink_controlers.Drink_create_Page);
 /* GET create update page */
 router.get('/update',secured, Drink_controlers.Drink_update_Page);
 
-router.get('/delete', Drink_controlers.Drink_delete_Page);
+router.get('/delete',secured, Drink_controlers.Drink_delete_Page);
